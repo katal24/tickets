@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Min price</th>
+      <th>Max price</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.artist %></td>
+        <td><%= event.price_low %></td>
+        <td><%= event.price_high %></td>
+        <td><%= event.event_date %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
