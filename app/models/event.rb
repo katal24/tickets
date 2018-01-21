@@ -4,4 +4,13 @@ class Event < ApplicationRecord
     validates :price_high, presence: true, numericality: true
     validates :event_date, presence: true
     has_many :tickets
+
+    serialize :place, Hash
+    # def self.search(search)
+    #     if search
+    #       find(:all, :conditions => ['artist LIKE ?', "%#{search}%"])
+    #     else
+    #       self.all
+    #     end
+    #   end
 end

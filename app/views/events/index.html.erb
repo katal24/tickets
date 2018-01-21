@@ -1,12 +1,44 @@
-<h1> Wszystkie wydarzenia</h1>
+<h1> Wydarzenia</h1>
+<%= form_tag events_path, :method => 'get' do %>
+  <p>
+    <%= date_field(:filterDate, :start) %>
+    <%= date_field(:filterDate, :stop) %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <ul>
-    <% for event in @events %>
+    <% for event in @events.select{|event| event.event_date >= Date.today} %>
         <li>
+        <% if  %>
+          
+        <% end %>
             <%= event.artist %>
-             <%= link_to "Show", "/events/#{event.id}" %>
-             </li>
+            <%= event.event_date %>
+            <%= link_to "Show", "/events/#{event.id}" %>
+            <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+        </li>
     <% end %>
 </ul>
 
-<%= link_to 'Nowe ogłoszenie', events_new_path %>
+<% if is_admin? %>
+<h2> Wydarzenia archiwalne</h2>
+
+<ul>
+    <% for event in @events.select{|event| event.event_date < Date.today} %>
+        <li>
+        <% if  %>
+          
+        <% end %>
+            <%= event.artist %>
+            <%= event.event_date %>
+            <%= link_to "Show", "/events/#{event.id}" %>
+            <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+        </li>
+    <% end %>
+</ul>
+<% end %>
+<%= @start_date  %>
+
+<%= link_to 'Nowe wydarzenie', events_new_path %>
 <%= render 'tickets/menu' %>

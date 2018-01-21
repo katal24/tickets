@@ -22,6 +22,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
+    @ticket = current_user.tickets.find_by(id: params[:id])
     @events = Event.all    
   end
 

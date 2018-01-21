@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120162740) do
+ActiveRecord::Schema.define(version: 20180120222415) do
 
   create_table "events", force: :cascade do |t|
     t.string "artist"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180120162740) do
     t.datetime "updated_at", null: false
     t.boolean "can_return"
     t.boolean "of_age"
+    t.text "place"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180120162740) do
     t.string "address"
     t.string "phone"
     t.decimal "cash"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

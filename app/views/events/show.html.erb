@@ -27,9 +27,48 @@
   <%= @event.event_date %>
 </p>
 
+<p>
+  <strong>Places:</strong>
+  <ul>
+  <% for key in @event.place.keys %>
+    <li> <%= key %> - <% %> <%= @event.place[key][0] %> |
+    free: <%= @event.place[key][0] - @event.place[key][2].length %> |
+    price: <%= @event.place[key][1] %></li>
+  <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Places:</strong><br/><br/>
+  <% @event.place.each do |key, typ| %>
+    <% [*1..typ[0]].each do |nr| %>
+      <%= link_to nr, :action => "show", :typ => key, :nr => nr,  :method => :get, :disabled => typ[2].include?(nr) %>
+      <% if nr % 10 == 0 %>
+        <br/>
+      <% end %>
+    <% end %>
+     <br/>
+  <% end %>
+</p>
 
 
-<%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id), events: @events %>
+  <% if @event.can_return || @event.of_age %>
+    <strong>Details</strong>
+    <ul>
+      <% if @event.can_return %>
+        <li>Possible return ticket </li>
+      <% end %>
+      <% if @event.of_age %>
+        <li>Only for of age </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+
+ <% if @event.event_date >= Date.today && @event.event_date < Date.today + 1.month %>
+  <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr), events: @events %>
+<% end %>
 
 <%= render "tickets_list" %>
 
