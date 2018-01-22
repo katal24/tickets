@@ -1,4 +1,4 @@
-<h1>Events</h1>
+<h1>Event</h1>
 
 <p id="notice"><%= notice %></p>
 <p id="komunikat"><%= flash[:komunikat] %></p>
@@ -31,10 +31,10 @@
   <%= @event.event_date %>
 </p>
 
-<p>
+<%#<p>
   <strong>Place:</strong>
   <%= @event.place %>
-</p>
+<%# </p> %>
 
 <p>
   <strong>Places:</strong>
@@ -52,7 +52,7 @@
   <% @event.place.each do |key, typ| %>
     <% [*1..typ[0]].each do |nr| %>
       <% if !typ[2].include?(nr) %>
-        <%= link_to nr, :action => "show", :typ => key, :nr => nr, :price_typ => typ[1], :method => :get, :disabled => typ[2].include?(nr) %>        
+        <%= link_to nr, :action => "show", :typ => key, :nr => nr, :price_typ => typ[1], :method => :get %>        
       <% else %>
         <%= nr %>
       <% end %>
@@ -60,7 +60,7 @@
         <br/>
       <% end %>
     <% end %>
-     <br/>
+     <br/> <br/>
   <% end %>
 </p>
 
@@ -100,7 +100,7 @@
   <% else %>
     Tylko pełnoletni mogą wziąć udział w tym wydarzeniu
   <% end %>
-  <%= render "tickets_list" %>
+  <%= render "tickets_list", tickets: @tickets, users: @users, event: @event %>
 <% end %>
 
 

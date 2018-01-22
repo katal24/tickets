@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'events/:id', :to => "events#show"
   post 'events/:id', :to => "events#show"
   
+  get 'search' => 'tickets#show'
+
   resources :tickets
   resources :events
   post 'akcja' => 'events#akcja', as: :akcja

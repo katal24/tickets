@@ -22,13 +22,12 @@
   </div>
 
 
-  <% if !@event.id %>
     
   <div class="field">
     <%= form.label :place %>
-    <%= form.text_field :place, id: :event_place %>
+    <%= form.text_field :place, id: :event_place, disabled: @event.id %>
   </div>
-  <% end %>
+
 
   <div class="field">
     <%= form.label :event_date %>

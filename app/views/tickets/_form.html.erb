@@ -17,25 +17,24 @@
 
   <div class="field">
     <%= form.label :seat_id_seq %>  
-    <%= form.text_field :seat_id_seq, id: :ticket_seat, value: ticket.seat_id_seq %>
+    <%= form.text_field :seat_id_seq, id: :ticket_seat, value: ticket.seat_id_seq, readonly: @event %>
   </div>
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.text_field :price, id: :ticket_seat, value: ticket.price%>    
+    <%= form.text_field :price, id: :ticket_seat, value: ticket.price, readonly: @event%>    
   </div>
 
-    <div class="field">
+    <div class="field" hidden>
       <%= form.label :event_id %>
       <%= form.select :event_id, options_for_select(events.collect {|e| e.id}, ticket.event_id), {} %>
     </div>
 
-  <div class="field">
+  <div class="field" hidden>
     <%= form.label :user_id %>  
     <%= form.text_field :user_id, id: :ticket_user_id, value: current_user.id %>
   </div>
 
-<%= ticket.price %>
   <div class="actions">
     <%= form.submit %>
   </div>

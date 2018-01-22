@@ -16,7 +16,9 @@
             <%= event.artist %>
             <%= event.event_date %>
             <%= link_to "Show", "/events/#{event.id}" %>
-            <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+            <% if is_admin? %>           
+                <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+            <% end %>
         </li>
     <% end %>
 </ul>

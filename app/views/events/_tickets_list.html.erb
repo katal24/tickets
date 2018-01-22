@@ -1,10 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tickets</h1>
-
+<%= form_tag search_path, :method => 'get' do %>
+  <p>
+    <%= text_field(:filterTicket, :nr) %>
+    <%= submit_tag "search", :name => nil %>
+  </p>
+<% end %>
 <table>
   <thead>
     <tr>
+      <th>Number</th>
       <th>Name</th>
       <th>Email address</th>
       <th>Seat id seq</th>
@@ -14,15 +20,18 @@
   </thead>
 
   <tbody>
-    <% @tickets.each_with_index do |ticket, i| %>
+    <% tickets.each_with_index do |ticket, i| %>
       <tr>
-        <td><%= @users[i].name %></td>
-        <td><%= @users[i].email %></td>
+        <td><%= ticket.id %></td>
+        <td><%= users[i].name %></td>
+        <td><%= users[i].email %></td>
         <td><%= ticket.seat_id_seq %></td>
         <td><%= ticket.price %></td>
         <td><%= link_to 'Show', ticket %></td>
-        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <% if @event.can_return && signed_in? %>
+        <%#<td><%= link_to 'Edit', edit_ticket_path(ticket) </td> %>
+        <% if event && event.can_return && signed_in? %>
+          <td><%= link_to 'Return', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% elsif events && signed_in? %>
           <td><%= link_to 'Return', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>

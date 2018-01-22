@@ -1,32 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Tickets</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Seat id seq</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tickets.each do |ticket| %>
-      <tr>
-        <td><%= ticket.seat_id_seq %></td>
-        <td><%= ticket.price %></td>
-        <td><%= link_to 'Show', ticket %></td>
-        <% if ticket.user == current_user %>
-          <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-          <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+ <%= render "events/tickets_list", tickets: @tickets, users: @users, events: @events, event: nil %>
 
 <%= link_to 'New Ticket', new_ticket_path %>
 <%= render 'menu' %>

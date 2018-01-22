@@ -6,12 +6,32 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    if signed_in?
+      if is_admin?
+        @tickets = Ticket.all
+      else
+        @tickets = Ticket.where(user_id: current_user.id)
+      end
+      
+        @users = []
+        @events = []
+        @tickets.each do |ticket|
+          @users << get_user_by_id(ticket.user_id)
+          @events << get_event_by_id(ticket.event_id)          
+        end
+    end
   end
 
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+
+    if params[:filterTicket].present?
+      @ticket = Ticket.find(params[:filterTicket][:nr])
+    end
+
+    @event = get_event_by_id(@ticket.event_id)
+    @user = get_user_by_id(@ticket.user_id)
   end
 
   # GET /tickets/new
@@ -113,10 +133,18 @@ class TicketsController < ApplicationController
     return ret
   end
 
+  def is_admin?
+    signed_in? ? current_user.admin : false
+  end
+
+  def signed_in?
+    !!current_user
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
-      @ticket = Ticket.find(params[:id])
+      @ticket = Ticket.find(params[:id]) if params[:id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -137,4 +165,7 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.find_by(id: params[:id])
       redirect_to tickets_path, notice: "Nie jesteś uprawniony do edycji tego biletu" if @ticket.nil? && current_user.admin.nil?
     end
+
+    helper_method :is_admin?
+    helper_method :signed_in?
 end

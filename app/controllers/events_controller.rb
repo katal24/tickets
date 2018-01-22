@@ -69,8 +69,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_paramsy)
-    if params[:event][:place].
     pars = params;
     hash = to_hash pars[:event][:place]
     # devise_parameter_sanitizer.for(:event) do |u|
@@ -83,9 +81,10 @@ class EventsController < ApplicationController
     
         print event_paramsy
         print "!!!!!!!!!!!!!"
+    @event = Event.new(event_paramsy)
       print @event
       print "end end end end end"
-    end
+
       if @event.save
          flash[:komunikat] = 'Event został poprawnie stworzony.'
          redirect_to "/events/#{@event.id}"
@@ -99,7 +98,7 @@ class EventsController < ApplicationController
   def update
 
       if @event.update(event_params)
-        redirect_to @event, notice: 'Ticket was successfully updated.'
+        redirect_to @event, notice: 'Event was successfully updated.'
       else
         render :edit
       end

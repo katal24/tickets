@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Ticket</h3>
+<p>
+  <strong>ID:</strong>
+  <%= @ticket.id %>
+</p>
+
 <p>
   <strong>Seat id seq:</strong>
   <%= @ticket.seat_id_seq %>
@@ -10,18 +16,40 @@
   <%= @ticket.price %>
 </p>
 
+<h3>Event</h3>
 <p>
-  <strong>Event_id</strong>
-  <%= @ticket.event_id %>
+  <strong>Artist:</strong>
+  <%= @event.artist %>
 </p>
 
 <p>
-  <strong>User_id</strong>
-  <%= @ticket.user_id %>
+  <strong>Description:</strong>
+  <%= @event.description %>
 </p>
 
-<% if @ticket.user == current_user %>
-  <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<% end %>
+<p>
+  <strong>Date:</strong>
+  <%= @event.event_date %>
+</p>
+
+<h3>User</h3>
+<p>
+  <strong>Artist:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+
+<%# <% if @ticket.user == current_user %>
+<%#  <%= link_to 'Edit', edit_ticket_path(@ticket) %> 
+<%#<% end %>
 <%= link_to 'Back', tickets_path %>
 <%= render 'menu' %>
