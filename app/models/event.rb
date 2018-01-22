@@ -1,10 +1,10 @@
 class Event < ApplicationRecord
     validates :artist, presence: true
-    # validates :price_low, presence: true, numericality: true
-    # validates :price_high, presence: true, numericality: true
     validates :event_date, presence: true
+    validates_with EventDateValidator
+    validates :place, format: { with: /(\d+:\d+(\.\d{0,2})?;)+/, message: "only format number:price;"}
+    
     has_many :tickets
-
     serialize :place, Hash
     # def self.search(search)
     #     if search

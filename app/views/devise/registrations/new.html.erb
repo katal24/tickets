@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :birth %>
+    <%= f.date_field :birth, id: :user_birth %>
+  </div>
+
+  <div class="field">
     <%= f.label :address %>
     <%= f.text_area :address, id: :user_address %>
   </div>

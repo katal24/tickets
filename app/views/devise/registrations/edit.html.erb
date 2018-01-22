@@ -38,6 +38,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :birth %>
+    <%= f.date_field :birth, autofocus: true, autocomplete: "birth" %>
+  </div>
+
+  <div class="field">
     <%= f.label :address %>
     <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
   </div>

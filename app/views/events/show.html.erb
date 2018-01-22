@@ -79,27 +79,28 @@
 
 
 <% if signed_in?%>
-  
- <% if @event.event_date >= Date.today && @event.event_date < Date.today + 1.month%>
-  <% if can_buy? %>
-    <% if @typ && @nr%>
-      <% if Date.today == @event.event_date %>
-        <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => 1.2*@price.to_f), events: @events %>
+  <% if !@event.of_age || (Date.today - 18.years > current_user.birth) %>
+    <% if @event.event_date >= Date.today && @event.event_date < Date.today + 1.month%>
+      <% if can_buy? %>
+        <% if @typ && @nr%>
+          <% if Date.today == @event.event_date %>
+            <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => 1.2*@price.to_f), events: @events %>
+          <% else %>
+            <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => @price), events: @events %>
+          <% end %>
+        <% else %>
+          <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id), events: @events %>   
+        <% end %>
       <% else %>
-        <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => @price), events: @events %>
+      Zakupiłeś już 5 biletów!
       <% end %>
-    <% else %>
-      <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id), events: @events %>   
-    <% end %>
+    <% else %>  
+      Sprzedaż biletów rozpocznie się miesiąc przed wydarzeniem
+     <% end %>  
   <% else %>
-   Zakupiłeś już 5 biletów!
+    Tylko pełnoletni mogą wziąć udział w tym wydarzeniu
   <% end %>
-<% else %>  
-  Sprzedaż biletów rozpocznie się miesiąc przed wydarzeniem
-<% end %>
-
-
-<%= render "tickets_list" %>
+  <%= render "tickets_list" %>
 <% end %>
 
 
