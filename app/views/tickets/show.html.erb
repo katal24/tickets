@@ -1,18 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @ticket.name %>
-</p>
-
-<p>
   <strong>Seat id seq:</strong>
   <%= @ticket.seat_id_seq %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @ticket.address %>
 </p>
 
 <p>
@@ -21,18 +11,13 @@
 </p>
 
 <p>
-  <strong>Email address:</strong>
-  <%= @ticket.email_address %>
-</p>
-
-<p>
-  <strong>Phone</strong>
-  <%= @ticket.phone %>
-</p>
-
-<p>
   <strong>Event_id</strong>
   <%= @ticket.event_id %>
+</p>
+
+<p>
+  <strong>User_id</strong>
+  <%= @ticket.user_id %>
 </p>
 
 <% if @ticket.user == current_user %>

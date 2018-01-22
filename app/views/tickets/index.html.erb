@@ -5,12 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
       <th>Seat id seq</th>
-      <th>Address</th>
       <th>Price</th>
-      <th>Email address</th>
-      <th>Phones</th>      
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,12 +14,8 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-        <td><%= ticket.name %></td>
         <td><%= ticket.seat_id_seq %></td>
-        <td><%= ticket.address %></td>
         <td><%= ticket.price %></td>
-        <td><%= ticket.email_address %></td>
-        <td><%= ticket.phone %></td>        
         <td><%= link_to 'Show', ticket %></td>
         <% if ticket.user == current_user %>
           <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>

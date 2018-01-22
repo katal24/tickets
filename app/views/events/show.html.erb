@@ -22,16 +22,25 @@
   <%= @event.price_high %>
 </p>
 
+<% if Date.today == @event.event_date %>
+  Uwaga! Dziś cena buletu większa o 20%!
+<% end %>
+
 <p>
   <strong>Date:</strong>
   <%= @event.event_date %>
 </p>
 
 <p>
+  <strong>Place:</strong>
+  <%= @event.place %>
+</p>
+
+<p>
   <strong>Places:</strong>
   <ul>
   <% for key in @event.place.keys %>
-    <li> <%= key %> - <% %> <%= @event.place[key][0] %> |
+    <li> zone: <%= key %> | places: <% %> <%= @event.place[key][0] %> |
     free: <%= @event.place[key][0] - @event.place[key][2].length %> |
     price: <%= @event.place[key][1] %></li>
   <% end %>
@@ -39,10 +48,14 @@
 </p>
 
 <p>
-  <strong>Places:</strong><br/><br/>
+  <strong>Choose your place:</strong><br/><br/>
   <% @event.place.each do |key, typ| %>
     <% [*1..typ[0]].each do |nr| %>
-      <%= link_to nr, :action => "show", :typ => key, :nr => nr,  :method => :get, :disabled => typ[2].include?(nr) %>
+      <% if !typ[2].include?(nr) %>
+        <%= link_to nr, :action => "show", :typ => key, :nr => nr, :price_typ => typ[1], :method => :get, :disabled => typ[2].include?(nr) %>        
+      <% else %>
+        <%= nr %>
+      <% end %>
       <% if nr % 10 == 0 %>
         <br/>
       <% end %>
@@ -65,12 +78,29 @@
   <% end %>
 
 
-
- <% if @event.event_date >= Date.today && @event.event_date < Date.today + 1.month %>
-  <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr), events: @events %>
+<% if signed_in?%>
+  
+ <% if @event.event_date >= Date.today && @event.event_date < Date.today + 1.month%>
+  <% if can_buy? %>
+    <% if @typ && @nr%>
+      <% if Date.today == @event.event_date %>
+        <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => 1.2*@price.to_f), events: @events %>
+      <% else %>
+        <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id, :seat_id_seq => String(@typ)+@nr, :price => @price), events: @events %>
+      <% end %>
+    <% else %>
+      <%= render "new_ticket", ticket: Ticket.new( :event_id => @event.id), events: @events %>   
+    <% end %>
+  <% else %>
+   Zakupiłeś już 5 biletów!
+  <% end %>
+<% else %>  
+  Sprzedaż biletów rozpocznie się miesiąc przed wydarzeniem
 <% end %>
 
+
 <%= render "tickets_list" %>
+<% end %>
 
 
 <%# <%= link_to 'Edit', edit_event_path(@event) %>

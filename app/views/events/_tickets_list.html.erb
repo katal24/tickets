@@ -6,27 +6,25 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Seat id seq</th>
-      <th>Address</th>
-      <th>Price</th>
       <th>Email address</th>
-      <th>Phones</th>      
+      <th>Seat id seq</th>
+      <th>Price</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @tickets.each do |ticket| %>
+    <% @tickets.each_with_index do |ticket, i| %>
       <tr>
-        <td><%= ticket.name %></td>
+        <td><%= @users[i].name %></td>
+        <td><%= @users[i].email %></td>
         <td><%= ticket.seat_id_seq %></td>
-        <td><%= ticket.address %></td>
         <td><%= ticket.price %></td>
-        <td><%= ticket.email_address %></td>
-        <td><%= ticket.phone %></td>        
         <td><%= link_to 'Show', ticket %></td>
         <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @event.can_return && signed_in? %>
+          <td><%= link_to 'Return', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
