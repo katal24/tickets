@@ -31,8 +31,6 @@ class EventsController < ApplicationController
   end
 
   def can_buy?
-    print "buyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
-    print @tickets.count < 5
     @tickets.count < 5 || is_admin?
   end
 
@@ -48,7 +46,7 @@ class EventsController < ApplicationController
     User.find(id)    
   end
 
-  def to_hash(str, arr_sep=',', key_sep=':')
+  def to_hash(str, arr_sep=';', key_sep=':')
     hash = {}
     array = str.split(arr_sep)
     letter = "A"
@@ -63,7 +61,6 @@ class EventsController < ApplicationController
       hash[letter] = [first, second, third]
       letter = letter.next
     end
-    print "HASHHHHHHHHHHHHHHHHHH"
     print hash
     return hash
   end
@@ -71,8 +68,6 @@ class EventsController < ApplicationController
   def create
     pars = params;
     hash = to_hash pars[:event][:place]
-    # devise_parameter_sanitizer.for(:event) do |u|
-    #   u.permit(:place, :artist, :description, :price_low, :price_high, :event_date, :can_return, :of_age)
     # end
     event_paramsy = pars.require(:event).permit(:place, :artist, :description, :price_low, :price_high, :event_date, :can_return, :of_age).permit!()
     event_paramsy["place"] = hash

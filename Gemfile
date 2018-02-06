@@ -33,7 +33,12 @@ gem 'jbuilder', '~> 2.5'
 #authenticate
 gem 'devise', '~> 4.4'
 
-gem 'bcrypt', platforms: :ruby
+# gem 'bcrypt', platforms: :ruby
+# gem 'bcrypt', '3.1.11', platforms: [:ruby, :x64_mingw, :mingw]
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'coffee-script-source', '~> 1.12', '>= 1.12.2'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

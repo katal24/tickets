@@ -1,7 +1,8 @@
+<div class="page-header">
 <h1>Event</h1>
+</div>
 
-<p id="notice"><%= notice %></p>
-<p id="komunikat"><%= flash[:komunikat] %></p>
+<div class="col-md-6">
 <p>
   <strong>Artist:</strong>
   <%= @event.artist %>
@@ -31,11 +32,6 @@
   <%= @event.event_date %>
 </p>
 
-<%#<p>
-  <strong>Place:</strong>
-  <%= @event.place %>
-<%# </p> %>
-
 <p>
   <strong>Places:</strong>
   <ul>
@@ -46,6 +42,22 @@
   <% end %>
   </ul>
 </p>
+
+  <% if @event.can_return || @event.of_age %>
+    <strong>Details</strong>
+    <ul>
+      <% if @event.can_return %>
+        <li>Possible return ticket </li>
+      <% end %>
+      <% if @event.of_age %>
+        <li>Only for of age </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+</div>
+<div class="col-md-6">
 
 <p>
   <strong>Choose your place:</strong><br/><br/>
@@ -63,19 +75,9 @@
      <br/> <br/>
   <% end %>
 </p>
+</div>
 
 
-  <% if @event.can_return || @event.of_age %>
-    <strong>Details</strong>
-    <ul>
-      <% if @event.can_return %>
-        <li>Possible return ticket </li>
-      <% end %>
-      <% if @event.of_age %>
-        <li>Only for of age </li>
-      <% end %>
-    </ul>
-  <% end %>
 
 
 <% if signed_in?%>
@@ -103,7 +105,4 @@
   <%= render "tickets_list", tickets: @tickets, users: @users, event: @event %>
 <% end %>
 
-
-<%# <%= link_to 'Edit', edit_event_path(@event) %>
 <%= link_to 'Back', events_path %>
-<%= render 'tickets/menu' %>

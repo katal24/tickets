@@ -61,12 +61,7 @@ class TicketsController < ApplicationController
           print @ticket.price
           redirect_to @ticket, notice: 'Ticket was successfully created.'
       else 
-        print "&&&&&&&&&&&&&&&&&&&&"  
-        notice = "&&&&&&&&&&&&&&&&"
         redirect_to request.referrer, notice: 'No money on the account.'
-        # render 'users/edit'
-        # format.html { redirect_to @ticket}
-        # , :notice => 'You have to few cash.' }
         # format.json { render :show, status: :created, location: @ticket }        
       end
   end

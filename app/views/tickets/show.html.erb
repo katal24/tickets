@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<h3>Ticket</h3>
+<div class="page-header">
+<h1>Ticket</h1>
+</div>
 <p>
   <strong>ID:</strong>
   <%= @ticket.id %>
@@ -51,5 +51,4 @@
 <%# <% if @ticket.user == current_user %>
 <%#  <%= link_to 'Edit', edit_ticket_path(@ticket) %> 
 <%#<% end %>
-<%= link_to 'Back', tickets_path %>
-<%= render 'menu' %>
+<%= link_to 'Back', tickets_path, class: "btn btn-default" %>

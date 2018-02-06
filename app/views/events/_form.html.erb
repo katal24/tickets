@@ -11,40 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :artist %>
-    <%= form.text_field :artist, id: :event_artist %>
+
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :artist %></div>
+    <div class="col-md-4"> <%= form.text_field :artist, id: :event_artist, class: "form-control" %></div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :event_description %>
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :description %></div>
+    <div class="col-md-4"> <%= form.text_field :description, id: :event_description, class: "form-control"  %></div>
   </div>
+</div>
 
-
-    
-  <div class="field">
-    <%= form.label :place %>
-    <%= form.text_field :place, id: :event_place, disabled: @event.id %>
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :place %></div>
+    <div class="col-md-4"> <%= form.text_field :place, id: :event_place, disabled: @event.id, class: "form-control"  %></div>
   </div>
+</div>
 
-
-  <div class="field">
-    <%= form.label :event_date %>
-    <%= form.date_field :event_date, id: :event_date %>
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :event_date %></div>
+    <div class="col-md-4"> <%= form.date_field :event_date, id: :event_date, class: "form-control"  %></div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :can_return %>
-    <%= form.check_box :can_return, id: :event_can_return %>
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :can_return %></div>
+    <div class="col-md-4"> <%= form.check_box :can_return, id: :event_can_return %></div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :of_age %>
-    <%= form.check_box :of_age, id: :event_of_age %>
+ <div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"> <%= form.label :of_age %></div>
+    <div class="col-md-4"> <%= form.check_box :of_age, id: :event_of_age %></div>
   </div>
+</div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary"%>
   </div>
 <% end %>

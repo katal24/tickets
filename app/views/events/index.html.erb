@@ -1,50 +1,90 @@
-<h1> Wydarzenia</h1>
-<%= form_tag events_path, :method => 'get' do %>
+<div class="page-header">
+<div class="row">
+  <div><h1>Events <small> Create an awesome event </small></h1></div>
+    <div class="c">
+  <% if is_admin? %>
+     <%= link_to 'Nowe wydarzenie', events_new_path,  class: "btn btn-info" %>
+<% end %>
+     </div>
+</div>
+</div>
+<div class="col-md-7"></div>
+<div class="col-md-5">
+<%= form_tag events_path, :method => 'get', class: "right" do %>
   <p>
     <%= date_field(:filterDate, :start) %>
     <%= date_field(:filterDate, :stop) %>
-    <%= submit_tag "Search", :name => nil %>
+    <%= submit_tag "Filtruj", :name => nil, class: "btn btn-default"%></button>
   </p>
 <% end %>
+</div>
 
+<div class="col-md-7">
 <ul>
     <% for event in @events.select{|event| event.event_date >= Date.today} %>
-        <li>
-        <% if  %>
-          
-        <% end %>
-            <%= event.artist %>
-            <%= event.event_date %>
-            <%= link_to "Show", "/events/#{event.id}" %>
+        <div class="panel panel-primary ">
+            <div class="panel-body">
+                <div class="col-md-8">
+                <h3> <%= event.artist %> </h3>
+                <%= event.event_date %>
+                </div>
+                <div class="col-md-4 pad-40" >
+                    cena: <%= event.price_low %> - <%= event.price_high %> zł
+                </div>
+            </div>
+            <div class="panel-footer">
+            <div class="row">
+<div class="col-md-3">
+            
+            <%= button_to "Show", "/events/#{event.id}", class: "btn btn-info" %>
+</div>
+<div class="col-md-3">
             <% if is_admin? %>           
-                <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+                <%= link_to "Edit", "/events/#{event.id}/edit", class: "btn btn-basic" %>            
             <% end %>
+            </div>
+            </div>
+            </div>
+        </div>            
         </li>
     <% end %>
 </ul>
 
-<% if is_admin? %>
-<h2> Wydarzenia archiwalne</h2>
 
+
+
+
+<% if is_admin? %>
+<h2> Archive events</h2>
 <ul>
     <% for event in @events.select{|event| event.event_date < Date.today} %>
-        <li>
-        <% if  %>
-          
-        <% end %>
-            <%= event.artist %>
-            <%= event.event_date %>
-            <%= link_to "Show", "/events/#{event.id}" %>
-            <% if is_admin? %>
-                <%= link_to "Edit", "/events/#{event.id}/edit" %>            
+        <div class="panel panel-primary ">
+            <div class="panel-body">
+                <div class="col-md-8">
+                <h3> <%= event.artist %> </h3>
+                <%= event.event_date %>
+                </div>
+                <div class="col-md-4 pad-40" >
+                    cena: <%= event.price_low %> - <%= event.price_high %> zł
+                </div>
+            </div>
+            <div class="panel-footer">
+            <div class="row">
+<div class="col-md-3">
+            
+            <%= button_to "Show", "/events/#{event.id}", class: "btn btn-info" %>
+</div>
+<div class="col-md-3">
+            <% if is_admin? %>           
+                <%= link_to "Edit", "/events/#{event.id}/edit", class: "btn btn-basic" %>            
             <% end %>
+            </div>
+            </div>
+            </div>
+        </div>            
         </li>
     <% end %>
 </ul>
-<% end %>
-<%= @start_date  %>
 
-<% if is_admin? %>
-    <%= link_to 'Nowe wydarzenie', events_new_path %>
+
 <% end %>
-<%= render 'tickets/menu' %>

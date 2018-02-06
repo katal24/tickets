@@ -10,20 +10,22 @@
       </ul>
     </div>
   <% end %>
-    <% if flash[:notice] %>
-    <div class="alert alert-danger"><%= flash[:notice] %></div>
-  <% end %>
+
   
 
-  <div class="field">
-    <%= form.label :seat_id_seq %>  
-    <%= form.text_field :seat_id_seq, id: :ticket_seat, value: ticket.seat_id_seq, readonly: @event %>
+<div class="form-group">
+  <div class="field row">
+    <div class="col-md-1"><%= form.label :seat_id_seq %>  </div>
+    <div class="col-md-2"><%= form.text_field :seat_id_seq, id: :ticket_seat, value: ticket.seat_id_seq, readonly: @event, class: "form-control" %></div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :ticket_seat, value: ticket.price, readonly: @event%>    
+<div class="form-group">
+  <div class="field row">
+   <div class="col-md-1"> <%= form.label :price %></div>
+   <div class="col-md-2"> <%= form.text_field :price, id: :ticket_seat, value: ticket.price, readonly: @event, class: "form-control" %></div>   
   </div>
+</div>
 
     <div class="field" hidden>
       <%= form.label :event_id %>
@@ -36,6 +38,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,4 +1,3 @@
  <%= render "events/tickets_list", tickets: @tickets, users: @users, events: @events, event: nil %>
 
-<%= link_to 'New Ticket', new_ticket_path %>
-<%= render 'menu' %>
+<%= link_to 'New Ticket', new_ticket_path, class: "btn btn-default" %>

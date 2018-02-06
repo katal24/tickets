@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Artist</th>
@@ -12,13 +10,13 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @events.select{|event| event.event_date >= Date.today}.each do |event| %>
       <tr>
         <td><%= event.artist %></td>
         <td><%= event.price_low %></td>
         <td><%= event.price_high %></td>
         <td><%= event.event_date %></td> 
-          <td><%= link_to "Buy", "/events/#{event.id}" %></td>
+          <td><%= link_to "Buy", "/events/#{event.id}",  class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
